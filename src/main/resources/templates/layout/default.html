@@ -3,18 +3,19 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-<meta http-equiv="Content-Type" content="text/html;
-charset=UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport"
-	content="width=device-width, initialscale=1, maximum-scale=1.0, user-scalable=no" />
+	content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
 <title>Default title</title>
-<link href="/webjars/materializecss/0.96.0/css/materialize.css"
+
+<link href="/webjars/materializecss/0.100.2/css/materialize.css"
 	type="text/css" rel="stylesheet" media="screen,projection" />
 </head>
 <body>
+
 	<ul id="lang-dropdown" class="dropdown-content">
 		<li><a href="?lang=en_US">English</a></li>
-		<li><a href="?lang=zh_CN">Chinese</a></li>
+		<li><a href="?lang=fr">French</a></li>
 	</ul>
 	<nav>
 		<div class="nav-wrapper indigo">
@@ -25,22 +26,18 @@ charset=UTF-8" />
 			</ul>
 		</div>
 	</nav>
-	<section layout:fragment="content">
+	
+	<section th:fragment="content">
 		<p>Page content goes here</p>
 	</section>
+
 	<script src="/webjars/jquery/3.3.1-1/jquery.js"></script>
 	<script src="/webjars/materializecss/0.100.2/js/materialize.js"></script>
 	<script type="text/javascript">
 		$(".dropdown-button").dropdown();
 	</script>
-	<script layout:fragment="script">
-		$('button').bind('click', function(e) {
-			if (e.currentTarget.name === 'save') {
-				$(e.currentTarget.form).removeAttr('novalidate');
-			} else {
-				$(e.currentTarget.form).attr('novalidate', 'novalidate');
-			}
-		});
+	<script type="text/javascript" layout:fragment="script">
+		
 	</script>
 </body>
 </html>
