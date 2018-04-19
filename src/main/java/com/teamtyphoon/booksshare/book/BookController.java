@@ -1,5 +1,7 @@
 package com.teamtyphoon.booksshare.book;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,8 +16,11 @@ public class BookController {
 	private BookService bs;
 
 	@RequestMapping(value = "/books", method = RequestMethod.GET)
-	public String books(Book book) {
-		return "book/list";
+	public ModelAndView books() {
+		Iterable<Book> books = bs.getAll();
+		ModelAndView modelAndView = new ModelAndView("book/list");
+		modelAndView.addObject("books", books);
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/book", method = RequestMethod.GET)
@@ -31,6 +36,7 @@ public class BookController {
 		return modelAndView;
 	}
 
+	@Transactional
 	@RequestMapping(value = "/book", method = RequestMethod.POST)
 	public ModelAndView create(Book book) {
 		bs.save(book);
@@ -40,6 +46,7 @@ public class BookController {
 		return modelAndView;
 	}
 
+	@Transactional
 	@RequestMapping(value = "/book/{id}", method = RequestMethod.DELETE)
 	public String delete(@PathVariable Long id) {
 		bs.delete(id);

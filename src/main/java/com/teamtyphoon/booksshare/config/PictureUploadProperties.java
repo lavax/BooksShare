@@ -8,14 +8,14 @@ import org.springframework.core.io.Resource;
 public class PictureUploadProperties {
 	private Resource uploadPath;
 	private Resource anonymousPicture;
-	private Resource defaultBookPicture;
+	private Resource defaultBookCover;
 
-	public Resource getDefaultBookPicture() {
-		return defaultBookPicture;
+	public Resource getDefaultBookCover() {
+		return defaultBookCover;
 	}
 
-	public void setDefaultBookPicture(Resource defaultBookPicture) {
-		this.defaultBookPicture = defaultBookPicture;
+	public void setDefaultBookCover(Resource defaultBookCover) {
+		this.defaultBookCover = defaultBookCover;
 	}
 
 	public Resource getAnonymousPicture() {

@@ -21,8 +21,10 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile 'org.springframework.boot:spring-boot-configuration-processor'
 	//	compile 'org.springframework.boot:spring-boot-starter-security'
+	
 	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+	compile 'net.coobird:thumbnailator:0.4.8'
 	//	compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
 	compile 'org.webjars:materializecss:0.100.2'
 	compile 'org.webjars:jquery:3.3.1-1'
