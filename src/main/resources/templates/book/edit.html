@@ -38,7 +38,7 @@
 						th:text="#{book.name}">Name</label>
 					<div th:errors="*{name}" class="red-text">Error</div>
 				</div>
-<!-- 				<div class="input-field col s6">
+				<!-- 				<div class="input-field col s6">
 					<input th:field="${book.authors}" id="isbn" type="text"
 						th:errorclass="invalid" required="required" /> <label
 						for="author" th:text="#{book.author}">Author</label>
@@ -52,7 +52,7 @@
 				</div>
 				<div class="input-field col s6">
 					<input th:field="${book.dateOfIssue}" id="birthDate" type="text"
-						th:errorclass="invalid" required="required" /> <label
+						th:errorclass="invalid" required="required" class="datepicker"/><label
 						for="dateOfIssue" th:text="#{book.dateOfIssue}"
 						th:placeholder="${dateFormat}">Date of issue</label>
 					<div th:errors="*{dateOfIssue}" class="red-text">Error</div>

@@ -21,7 +21,8 @@
 	</ul>
 	<nav>
 		<div class="nav-wrapper indigo">
-			<a href="#" class="brand-logo" th:text="#{common.title}">Books Share</a>
+			<a href="#" class="brand-logo" th:text="#{common.title}">Books
+				Share</a>
 			<ul class="right">
 				<li><a th:href="@{/book}"><i class="material-icons">create</i></a></li>
 				<li><a href="badges.html"><i class="material-icons">person</i></a></li>
@@ -40,6 +41,23 @@
 	<script src="/webjars/materializecss/0.100.2/js/materialize.js"></script>
 	<script type="text/javascript">
 		$(".dropdown-button").dropdown();
+/* 		$('.datepicker').pickadate({
+			selectMonths : true, // Creates a dropdown to control month
+			selectYears : 15
+		// Creates a dropdown of 15 years to control year
+		}); */
+		$('.datepicker_start').pickadate({
+	        selectMonths: true, // Creates a dropdown to control month
+	        selectYears: 15, // Creates a dropdown of 15 years to control year
+	        format: 'yyyy/mm/dd',
+	        weekdaysLetter: ['日', '一', '二', '三', '四', '五', '六'],
+	        today: '今天',
+	        clear: '清除',
+	        close: '关闭',
+	        monthsFull: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+	        monthsShort: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+	        weekdaysFull: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+	        });
 	</script>
 	<script type="text/javascript" layout:fragment="script">
 		

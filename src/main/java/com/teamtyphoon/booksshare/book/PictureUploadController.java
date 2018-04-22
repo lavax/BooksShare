@@ -26,8 +26,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teamtyphoon.booksshare.config.PictureUploadProperties;
 
-import net.coobird.thumbnailator.Thumbnails;
-
 //TODO:
 @Controller
 // @SessionAttributes("picturePath")
@@ -36,13 +34,16 @@ public class PictureUploadController {
 	private final Resource anonymousPicture;
 	private final Resource defaultBookCover;
 	private final MessageSource messageSource;
+	private UserBookSession userBookSession;
 
 	@Autowired
-	public PictureUploadController(PictureUploadProperties uploadProperties, MessageSource messageSource) {
+	public PictureUploadController(PictureUploadProperties uploadProperties, UserBookSession userBookSession,
+			MessageSource messageSource) {
 		picturesDir = uploadProperties.getUploadPath();
 		anonymousPicture = uploadProperties.getAnonymousPicture();
 		defaultBookCover = uploadProperties.getDefaultBookCover();
 		this.messageSource = messageSource;
+		this.userBookSession = userBookSession;
 
 	}
 
@@ -61,30 +62,25 @@ public class PictureUploadController {
 	// return "profile/uploadPage";
 	// }
 
-	@RequestMapping(value = "/profile", params = { "upload" }, method = RequestMethod.POST)
+	@RequestMapping(value = "/book", params = { "upload" }, method = RequestMethod.POST)
 	public String onUpload(@RequestParam MultipartFile file, RedirectAttributes redirectAttrs) throws IOException {
 		if (file.isEmpty() || !isImage(file)) {
 			redirectAttrs.addFlashAttribute("error", "Incorrect file. Please upload a picture.");
-			return "redirect:/profile";
+			return "redirect:/book";
 		}
-
-		String fileExtension = getFileExtension(file.getOriginalFilename());
-		File tempFile = File.createTempFile("pic", fileExtension, picturesDir.getFile());
-		try (InputStream in = file.getInputStream(); OutputStream out = new FileOutputStream(tempFile)) {
-			IOUtils.copy(in, out);
-		}
-		Resource picturePath = copyFileToPictures(file);
-
-		return "redirect:profile";
+		Resource bookCover = copyFileToPictures(file);
+		userBookSession.setBookCover(bookCover);
+		return "redirect:/book";
 	}
 
 	@RequestMapping(value = "/bookCover")
 	public void getUploadedPicture(HttpServletResponse response) throws IOException {
-		response.setHeader("Content-Type", URLConnection.guessContentTypeFromName(defaultBookCover.toString()));
-		InputStream inputStream = defaultBookCover.getInputStream();
+		Resource picturePath = userBookSession.getBookCover() == null ? defaultBookCover
+				: userBookSession.getBookCover();
+		response.setHeader("Content-Type", URLConnection.guessContentTypeFromName(picturePath.toString()));
 		// Thumbnails.of(inputStream).size(150,
 		// 150).toOutputStream(response.getOutputStream());
-		IOUtils.copy(inputStream, response.getOutputStream());
+		IOUtils.copy(picturePath.getInputStream(), response.getOutputStream());
 	}
 
 	@ExceptionHandler(IOException.class)
