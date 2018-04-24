@@ -17,6 +17,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +36,8 @@ public class PictureUploadController {
 	private final Resource defaultBookCover;
 	private final MessageSource messageSource;
 	private UserBookSession userBookSession;
+	@Autowired
+	private BookService bs;
 
 	@Autowired
 	public PictureUploadController(PictureUploadProperties uploadProperties, UserBookSession userBookSession,
@@ -77,6 +80,17 @@ public class PictureUploadController {
 	public void getUploadedPicture(HttpServletResponse response) throws IOException {
 		Resource picturePath = userBookSession.getBookCover() == null ? defaultBookCover
 				: userBookSession.getBookCover();
+		response.setHeader("Content-Type", URLConnection.guessContentTypeFromName(picturePath.toString()));
+		// Thumbnails.of(inputStream).size(150,
+		// 150).toOutputStream(response.getOutputStream());
+		IOUtils.copy(picturePath.getInputStream(), response.getOutputStream());
+	}
+
+	@RequestMapping(value = "/bookCover/{id}")
+	public void getBookCoverPicture(@PathVariable Long id, HttpServletResponse response) throws IOException {
+		Book findById = bs.findById(id);
+		String coverUrl = findById.getCoverUrl();
+		Resource picturePath = new FileSystemResource(coverUrl);
 		response.setHeader("Content-Type", URLConnection.guessContentTypeFromName(picturePath.toString()));
 		// Thumbnails.of(inputStream).size(150,
 		// 150).toOutputStream(response.getOutputStream());
