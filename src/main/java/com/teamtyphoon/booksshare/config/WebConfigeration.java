@@ -13,7 +13,7 @@ import com.teamtyphoon.booksshare.date.CNLocalDateFormatter;
 public class WebConfigeration {
 
 	public void addFormatters(FormatterRegistry registry) {
-//		registry.addFormatterForFieldType(LocalDate.class, new CNLocalDateFormatter());
+		registry.addFormatterForFieldType(LocalDate.class, new CNLocalDateFormatter());
 		//// registry.addConverter(Long.class, String.class, new Converter<Long,
 		// String>() {
 		////

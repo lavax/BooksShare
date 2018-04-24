@@ -16,8 +16,8 @@
 				<p th:text="${#calendars.format(book.dateOfIssue,'yyyy/MM/dd')}">Book
 					date of issue</p> <a href="#!" class="secondary-content"><i
 					class="material-icons">star</i></a></li>
-		</ul> -->
-		<div class="container">
+		</ul> 
+		<div class="container">-->
 			<form th:action="@{/book}" th:method="DELETE" class="col m8 s12 offset-m2">
 				<div class="col s4" th:each="book:${books}">
 					<div class="card">
@@ -42,7 +42,6 @@
 				</div>
 			</form>
 		</div>
-	</div>
 
 
 </body>

@@ -46,13 +46,13 @@
 				</div> -->
 				<div class="input-field col s6">
 					<input th:field="${book.isbn}" id="isbn" type="text"
-						th:errorclass="invalid" required="required" /> <label for="isbn"
+						th:errorclass="invalid" /> <label for="isbn"
 						th:text="#{book.isbn}">ISBN</label>
 					<div th:errors="*{isbn}" class="red-text">Error</div>
 				</div>
 				<div class="input-field col s6">
 					<input th:field="${book.dateOfIssue}" id="birthDate" type="text"
-						th:errorclass="invalid" required="required" class="datepicker"/><label
+						th:errorclass="invalid" required="required" class="datepicker" /><label
 						for="dateOfIssue" th:text="#{book.dateOfIssue}"
 						th:placeholder="${dateFormat}">Date of issue</label>
 					<div th:errors="*{dateOfIssue}" class="red-text">Error</div>

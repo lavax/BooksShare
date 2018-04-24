@@ -1,6 +1,7 @@
 package com.teamtyphoon.booksshare.book;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,7 @@ public class BookController {
 
 	@Transactional
 	@RequestMapping(value = "/book", method = RequestMethod.POST)
-	public ModelAndView create(Book book) {
+	public ModelAndView create(@Valid Book book) {
 		bs.save(book);
 		return bookList();
 	}

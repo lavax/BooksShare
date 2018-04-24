@@ -1,13 +1,11 @@
 package com.teamtyphoon.booksshare.book;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -19,14 +17,14 @@ public class Book {
 	@NotNull
 	private String name;
 	private String isbn;
-//	@OneToMany
-//	private List<Author> authors;
-	private Date dateOfIssue;
+	// @OneToMany
+	// private List<Author> authors;
+	private LocalDate dateOfIssue;
 	private String description;
 	private String coverUrl;
 
 	private String uploader;
-	private Date uploadDate;
+	private LocalDate uploadDate;
 
 	// @ManyToMany
 	// private List<Label> labels;
@@ -71,11 +69,11 @@ public class Book {
 		this.isbn = isbn;
 	}
 
-	public Date getDateOfIssue() {
+	public LocalDate getDateOfIssue() {
 		return dateOfIssue;
 	}
 
-	public void setDateOfIssue(Date dateOfIssue) {
+	public void setDateOfIssue(LocalDate dateOfIssue) {
 		this.dateOfIssue = dateOfIssue;
 	}
 
@@ -95,11 +93,11 @@ public class Book {
 		this.uploader = uploader;
 	}
 
-	public Date getUploadDate() {
+	public LocalDate getUploadDate() {
 		return uploadDate;
 	}
 
-	public void setUploadDate(Date uploadDate) {
+	public void setUploadDate(LocalDate uploadDate) {
 		this.uploadDate = uploadDate;
 	}
 
