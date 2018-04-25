@@ -28,7 +28,7 @@ public class BookController {
 		return "book/edit";
 	}
 
-	@RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/book/{id}/detail", method = RequestMethod.GET)
 	public ModelAndView detail(@PathVariable Long id) {
 		Book book = bs.findById(id);
 		ModelAndView modelAndView = new ModelAndView("book/detail");
